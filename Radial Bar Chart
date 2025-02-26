@@ -1,0 +1,90 @@
+# How to Create Radial Bar Chart (Spiral Chart)🚀 
+
+📊 Spiral Pie Chart with Bar – Step-by-Step Breakdown
+This visualization creates a spiral effect by plotting X and Y coordinates using trigonometry (SIN, COS). The spiral effect is driven by ranking, percentage scaling, and indexing.
+
+🔢 Sample Data
+Category	Total Ratings
+A	50
+B	80
+C	120
+D	200
+E	300
+📌 Step 1: Understanding the Formulas
+1️⃣ Rank Calculation (My_rank)
+plaintext
+Copy
+Edit
+Myrank = RANK_UNIQUE([Total Ratings], 'asc')
+This assigns a unique rank based on Total Ratings (smallest to largest).
+Example ranking for the data above:
+A → 1, B → 2, C → 3, D → 4, E → 5
+2️⃣ Percentage Calculation (Percentage)
+plaintext
+Copy
+Edit
+Percentage = [My_total] / [My_total_max]
+My_total is the maximum value of [Total Ratings] across all categories.
+In our example, My_total_max = 300.
+So, Percentage for each category:
+A → 50/300 = 0.1667
+B → 80/300 = 0.2667
+C → 120/300 = 0.40
+D → 200/300 = 0.6667
+E → 300/300 = 1.00
+
+3️⃣ X & Y Positioning Using Trigonometry
+plaintext
+Copy
+Edit
+X = COS(RADIANS([My_index] * [Percentage])) * [My_rank]
+Y = SIN(RADIANS([My_index] * [Percentage])) * [My_rank]
+COS() & SIN() help in plotting points in a circular motion (think of a clock!).
+[My_index] controls rotation to spread data in a spiral.
+[My_rank] scales the spiral outward.
+📈 Step 2: How It Works with a Visual
+🔹 Step-by-Step Breakdown of Spiral Plotting
+We start at (0,0) → Each data point moves outward based on its rank.
+X and Y values are calculated using the COS and SIN functions.
+The angle (My_index * Percentage) controls rotation, so different values spread out in a spiral form.
+As the rank increases, the points move outward, creating a spiral effect.
+scss
+Copy
+Edit
+       .  (E)
+    .      .
+  .          .
+(A) ---- (B) ---- (C) ---- (D) 
+📌 Step 3: How to Implement in Tableau
+1️⃣ Create a Calculated Field for My_rank
+
+plaintext
+Copy
+Edit
+RANK_UNIQUE([Total Ratings], 'asc')
+2️⃣ Create Percentage Calculation
+
+plaintext
+Copy
+Edit
+[Total Ratings] / WINDOW_MAX([Total Ratings])
+3️⃣ Create INDEX Calculation
+
+plaintext
+Copy
+Edit
+INDEX()-1
+4️⃣ Create X and Y Calculations
+
+plaintext
+Copy
+Edit
+X = COS(RADIANS([My_index] * [Percentage])) * [My_rank]
+Y = SIN(RADIANS([My_index] * [Percentage])) * [My_rank]
+5️⃣ Plot on a Scatter Plot
+
+Drag X to Columns, Y to Rows
+Change Mark Type to Circle
+Adjust size & color to match categories
+🎯 Final Thoughts
+This chart combines ranking, percentages, and trigonometry to create a spiral effect where data points move outward based on their values.
