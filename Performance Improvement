@@ -1,0 +1,84 @@
+Improving Tableau Report Performance
+
+1. Data Optimization
+
+a. Data Source Best Practices
+
+Extracts Over Live Connections: Use extracts wherever possible to improve performance.
+
+Filter Data at the Source: Minimize data by applying data source filters or SQL queries before importing to Tableau.
+
+Reduce Unnecessary Columns and Rows: Import only the necessary data fields.
+
+Optimize Data Types: Use the most efficient data types (e.g., integers instead of strings).
+
+Aggregate Data: Aggregate data in the data source itself rather than in Tableau.
+
+b. Indexing and Partitioning
+
+Add indexes to frequently used columns in your database.
+
+Partition large tables for faster query execution.
+
+2. Workbook Design
+
+a. Filtering Optimization
+
+Use Context Filters: Context filters create a temporary table, optimizing subsequent filters.
+
+Minimize Quick Filters: Quick filters generate multiple queries; use parameters or actions when possible.
+
+Avoid Using "Only Relevant Values" for Filters: This recalculates the list of values frequently, slowing performance.
+
+Reduce Filter Complexity: Use inclusive filters (IN) instead of complex conditions.
+
+b. Calculations Optimization
+
+Use Aggregated Fields in Calculations: Avoid row-level calculations if aggregation can be done first.
+
+Minimize Table Calculations: Pre-calculate values in the data source instead of in Tableau.
+
+Avoid Blended Calculations: Blending can slow down performance; consolidate data sources if possible.
+
+c. Visualization Optimization
+
+Limit the Number of Marks: Too many marks (data points) increase rendering time.
+
+Reduce the Number of Sheets in a Dashboard: Multiple worksheets with complex interactions increase query load.
+
+Use Fixed Axis Ranges: Avoid dynamic axis scaling where possible to improve rendering performance.
+
+3. Dashboard Optimization
+
+Use Fewer Visualizations: Combine multiple visualizations where possible.
+
+Reduce the Number of Dashboard Actions: Too many actions increase interactivity delays.
+
+Use Tiled Layout Instead of Floating: Tiled layouts are better optimized in Tableau.
+
+4. Data Connection Optimization
+
+Use Extracts Wisely: Incremental refresh extracts when possible.
+
+Avoid Custom SQL if Possible: Custom SQL queries can be slow; use Tableau’s native data connectors.
+
+Optimize Joins: Perform joins in the database rather than Tableau when possible.
+
+5. General Best Practices
+
+Limit Workbook Size: Split large workbooks into multiple smaller ones if possible.
+
+Remove Unused Fields: Eliminate unnecessary calculated fields, parameters, and sheets.
+
+Use Performance Recorder: Tableau's Performance Recorder helps identify bottlenecks and optimize queries.
+
+6. Server Optimization
+
+Schedule Extract Refreshes During Off-Peak Hours: Reduces server load during active periods.
+
+Manage User Permissions Efficiently: Limit access to minimize resource strain.
+
+Leverage Tableau's Caching: Optimize workbook settings to take advantage of caching.
+
+Following these steps will ensure your Tableau dashboards run efficiently and provide a seamless user experience.
+
